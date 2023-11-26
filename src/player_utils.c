@@ -167,6 +167,12 @@ void set_player_as_lost_level(struct PlayerInfo *player)
         clear_things_in_hand(player);
         dungeon->num_things_in_hand = 0;
     }
+
+    // Reset players palette if the player was in possession mode
+    if(player->view_mode == PVM_CreatureView){
+        PaletteSetPlayerPalette(player, engine_palette);
+    }
+
     if (player_uses_power_call_to_arms(player->id_number))
         turn_off_power_call_to_arms(player->id_number);
     if (player_uses_power_sight(player->id_number))
